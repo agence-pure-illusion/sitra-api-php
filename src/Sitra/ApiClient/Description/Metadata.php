@@ -121,7 +121,6 @@ class Metadata
             }
         }
 
-        // Force "form style" format
-        return new Query($metadata);
+        return $metadata;
     }
 }
