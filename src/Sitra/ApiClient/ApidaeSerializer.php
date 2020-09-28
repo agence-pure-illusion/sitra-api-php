@@ -207,7 +207,7 @@ class ApidaeSerializer
         }
 
         if ($scope === AuthenticationSubscriber::META_SCOPE) {
-            $tokenResponse = $this->client->get('/oauth/token', [
+            $body = $this->client->get('/oauth/token', [
               'auth' => [
                 $this->config['OAuthClientId'],
                 $this->config['OAuthSecret'],
@@ -218,7 +218,9 @@ class ApidaeSerializer
               'headers' => [
                 'accept' => 'application/json',
               ],
-            ])->json();
+            ]);
+            
+            $tokenResponse = \GuzzleHttp\json_decode($body, true);
 
             $this->config['accessTokens'][$tokenResponse['scope']] = $tokenResponse['access_token'];
 
